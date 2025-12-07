@@ -1,0 +1,1 @@
+To develop a smart waste management system using virtual sensor to simulate a waste level percentages and also develop a shortest  route plan using dijiktras algorithm to pick up a wastes using the high level percentages on the map. 
