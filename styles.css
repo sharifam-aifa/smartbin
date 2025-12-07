@@ -1,0 +1,179 @@
+:root {
+  --bg: #f7f9fc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --brand: #2b7cff;
+  --border: #e2e8f0;
+}
+
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --surface: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --brand: #60a5fa;
+  --border: #1f2937;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 16px;
+  display:flex;
+  flex-direction:column;
+}
+
+.brand {
+  font-weight: 800;
+  color: var(--brand);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.sidebar nav {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.sidebar button {
+  text-align:left;
+  border:1px solid var(--border);
+  background: transparent;
+  padding:10px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  color: var(--text); 
+}
+
+.sidebar button.active,
+.sidebar button:hover {
+  background: rgba(43,124,255,0.08);
+  border-color: rgba(43,124,255,0.25);
+  color: var(--brand);
+}
+
+.user {
+  margin-top:auto;
+  font-size:12px;
+  color: var(--muted);
+}
+
+.user .name {
+  font-weight:600;
+  color: var(--text);
+}
+
+.main {
+  flex: 1;
+  padding: 20px;
+  overflow: auto;
+}
+
+section { display:none; }
+section.active { display:block; }
+
+.kpis {
+  display:grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+}
+
+.card .label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.card .value {
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+#mapEl {
+  width:100%;
+  height:100vh;
+  border-radius:16px;
+  border:1px solid var(--border);
+}
+
+.controls {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.mono {
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px;
+  white-space:pre-wrap;
+}
+
+#scheduleTable {
+  width:100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+
+#scheduleTable th,
+#scheduleTable td {
+  padding:10px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+
+#scheduleTable tbody tr:hover {
+  background: rgba(43,124,255,0.06);
+}
+
+#settings .grid {
+  display:grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap:12px;
+}
+
+#settings input,
+#settings select {
+  width:100%;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background: var(--surface); 
+  color: var(--text);
+}
+
+#settings button {
+  margin-top: 10px;
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background: var(--brand);
+  color:white;
+  cursor:pointer;
+}

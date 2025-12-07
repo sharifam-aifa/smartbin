@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>SmartWaste Dashboard</title>
+ <link rel="stylesheet" href="styles.css" />
+ <!-- Leaflet -->
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+ <!-- Chart.js -->
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ </head>
+ <body>
+ <aside class="sidebar">
+ <div class="brand">SmartWaste</div>
+ <nav>
+ <button class="active" onclick="showSection('dashboard', 
+this)">Dashboard</button>
+ <button onclick="showSection('map', this)">Live Map</button>
+ <button onclick="showSection('route', this)">Route Planning</button>
+ <button onclick="showSection('schedule', this)">Schedules</button>
+ <button onclick="showSection('analytics', this)">Analytics</button>
+ <button onclick="showSection('settings', this)">Settings</button>
+ </nav>
+ <div class="user">
+ <div class="name">Shambavi </div>
+<div class="role">Operations Manager</div>
+<div class="name">Sharifa</div>
+<div class="role">Design Manager</div>
+ </div>
+ </aside>
+ <main class="main">
+ <!-- Dashboard -->
+ <section id="dashboard" class="active">
+ <h1>Dashboard</h1>
+ <p>Welcome to SmartWaste. Monitor bin status, plan routes, and manage 
+schedules.</p>
+ <div class="kpis">
+ <div class="card"><div class="label">Total Bins</div><div id="kpiTotal"
+ class="value">0</div></div>
+ <div class="card"><div class="label">Avg Fill</div><div id="kpiAvg"
+ class="value">0%</div></div>
+ <div class="card"><div class="label">Critical Bins</div><div
+ id="kpiCritical" class="value">0</div></div>
+ <div class="card"><div class="label">Next Pickup</div><div id="kpiNext"
+ class="value">-</div></div>
+ </div>
+ </section>
+ <!-- Map -->
+ <section id="map">
+ <h2>Live Bin Map</h2>
+ <div id="mapEl"></div>
+ </section>
+ <!-- Route Planning -->
+<section id="route">
+  <h2>Route Planning</h2>
+  <div class="controls">
+    <label>
+      Threshold (%) 
+      <input type="number" id="routeThreshold" min="0" max="100" value="80" />
+    </label>
+    <button id="btnPlan">Plan Route</button>
+  </div>
+  <pre id="routeOutput" class="mono"></pre>
+</section>
+
+ <!-- Schedules -->
+ <section id="schedule">
+ <h2>Schedules</h2>
+ <table id="scheduleTable">
+ <thead><tr><th>ID</th><th>Bin</th><th>Date</th><th>Window</th><th>Status</th><th>Action</th></tr></thead>
+ <tbody></tbody>
+ </table>
+ </section>
+<!-- Analytics -->
+ <section id="analytics">
+ <h2>Analytics</h2>
+ <canvas id="binChart"></canvas>
+ </section>
+ <!-- Settings -->
+ <section id="settings">
+ <h2>Settings</h2>
+ <form id="settingsForm">
+ <div class="grid">
+ <label>Critical Fill (%)
+ <input type="number" name="criticalFillPercent" min="0" max="100" />
+ </label>
+ <label>Refresh (seconds)
+ <input type="number" name="refreshSeconds" min="5" />
+ </label>
+ <label>Theme
+ <select name="theme">
+ <option value="light">Light</option>
+ <option value="dark">Dark</option>
+ </select>
+ </label>
+ </div>
+ <button type="submit">Save Settings</button>
+ </form>
+ </section>
+ </main>
+ <script src="app.js" defers></script>
+ </body>
+ </html>
