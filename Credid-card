@@ -1,0 +1,165 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMZRVHUp63wnqHxBSbm3/0X",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sharifam-aifa/smartbin/blob/main/Credid-card\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hIIzCc31Gzlr",
+        "outputId": "62b122a4-1da0-4b03-bc57-68faf55a8f5d"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "User-Item Matrix\n",
+            "Product   Keyboard  Laptop  Mouse\n",
+            "Customer                         \n",
+            "A              0.0     5.0    4.0\n",
+            "B              3.0     5.0    0.0\n",
+            "C              5.0     0.0    4.0\n",
+            "D              0.0     4.0    5.0\n",
+            "\n",
+            "Customer Similarity Matrix\n",
+            "Customer         A         B         C         D\n",
+            "Customer                                        \n",
+            "A         1.000000  0.669589  0.390244  0.975610\n",
+            "B         0.669589  1.000000  0.401754  0.535672\n",
+            "C         0.390244  0.401754  1.000000  0.487805\n",
+            "D         0.975610  0.535672  0.487805  1.000000\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Retail Recommendation Engine\n",
+        "\n",
+        "import pandas as pd\n",
+        "from sklearn.metrics.pairwise import cosine_similarity\n",
+        "\n",
+        "# Sample customer purchase data\n",
+        "data = {\n",
+        "    'Customer': ['A','A','B','B','C','C','D','D'],\n",
+        "    'Product': ['Laptop','Mouse','Laptop','Keyboard','Mouse','Keyboard','Laptop','Mouse'],\n",
+        "    'Rating': [5,4,5,3,4,5,4,5]\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "# Create User-Item Matrix\n",
+        "user_item = df.pivot_table(index='Customer',\n",
+        "                           columns='Product',\n",
+        "                           values='Rating',\n",
+        "                           fill_value=0)\n",
+        "\n",
+        "print(\"User-Item Matrix\")\n",
+        "print(user_item)\n",
+        "\n",
+        "# Cosine Similarity\n",
+        "similarity = cosine_similarity(user_item)\n",
+        "\n",
+        "similarity_df = pd.DataFrame(similarity,\n",
+        "                             index=user_item.index,\n",
+        "                             columns=user_item.index)\n",
+        "\n",
+        "print(\"\\nCustomer Similarity Matrix\")\n",
+        "print(similarity_df)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "from sklearn.ensemble import RandomForestClassifier\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.metrics import accuracy_score\n",
+        "\n",
+        "# Sample banking transactions\n",
+        "data = {\n",
+        "    'Amount':[100,5000,200,15000,300,8000],\n",
+        "    'Location':[1,0,1,0,1,0],\n",
+        "    'Time':[10,23,14,2,12,1],\n",
+        "    'Fraud':[0,1,0,1,0,1]\n",
+        "}\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "X = df[['Amount','Location','Time']]\n",
+        "y = df['Fraud']\n",
+        "\n",
+        "X_train,X_test,y_train,y_test = train_test_split(\n",
+        "    X,y,test_size=0.3,random_state=42)\n",
+        "\n",
+        "model = RandomForestClassifier()\n",
+        "model.fit(X_train,y_train)\n",
+        "\n",
+        "pred = model.predict(X_test)\n",
+        "\n",
+        "print(\"Accuracy:\",accuracy_score(y_test,pred))"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "n5kP00yaKe0n",
+        "outputId": "cdb2f5e6-1eb1-4906-95d9-850de8e174aa"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy: 1.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "L62BP05nKUrk"
+      },
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "uh6gReXZKVN5"
+      },
+      "execution_count": 4,
+      "outputs": []
+    }
+  ]
+}
